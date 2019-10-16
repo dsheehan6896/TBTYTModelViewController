@@ -28,9 +28,28 @@ public class DemoController implements ListSelectionListener, MouseMotionListene
 	 * repaint the window.  Need more logic to draw solid lines.
 	 */
 	public void mouseDragged(MouseEvent event) {
-		Point point = event.getPoint(); // find point
-		model.addPoint(point);
+		Point lastPoint = null; // find point
+		Point newPoint = event.getLocationOnScreen();
+		
+		
+		// I know this code won't work-- but it's a start
+		
+		// The idea is to grab the newest point, then find the slope of the last point it remembered
+		// Then, use the slope to draw a line from both points.
+		// It may be simpler than this, but uhhhh who knows
+			//Calculate slope-- draw each point between thisPoint and the last remembered one
+			double slope = lastPoint.getY() - newPoint.getY() / lastPoint.getX() - newPoint.getX();
+			model.addPoint(new Point((int)newPoint.getY(), (int)newPoint.getX()));
+		
+		//model.addPoint(newPoint);
+		lastPoint = newPoint;
 		view.repaint();
+		
+		// get current point
+		// get last point of where it stopped
+		// get slope (y= mx+b)
+		// draw line of that slope
+		
 	} // end method mouseDragged
 
 	/**
@@ -38,7 +57,6 @@ public class DemoController implements ListSelectionListener, MouseMotionListene
 	 * here to implement MouseMotionListener.
 	 */
 	public void mouseMoved(MouseEvent event) {
-		// this method intentionally left blank
 	}
 
 	/**
